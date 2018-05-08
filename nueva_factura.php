@@ -14,6 +14,7 @@
    $active_reportes="";
    $active_caja_chica = "";
    $active_kardex="";
+   $active_dashboard="";
    $title="SGB | Registro de Breaks";
    
    /* Connect To Database*/

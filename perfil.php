@@ -32,6 +32,10 @@
 
 	$active_caja_chica = "";
 
+	$active_kardex="";	
+
+	$active_dashboard="";
+
 	$title="Configuración | SGB";
 
 	

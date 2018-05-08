@@ -16,6 +16,7 @@
 	$active_reportes="active";
 	$active_caja_chica = "";
 	$active_kardex="";
+	$active_dashboard="";	
 	$title="Reportes | SGB";
 ?>
 <!DOCTYPE html>

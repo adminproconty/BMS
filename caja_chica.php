@@ -17,7 +17,8 @@
 	$active_usuarios="";	
 	$active_reportes="";
 	$active_kardex="";
-    $active_caja_chica = "active";
+	$active_caja_chica = "active";
+	$active_dashboard="";
 	$title="Caja Chica | SGB";
 ?>
 <!DOCTYPE html>

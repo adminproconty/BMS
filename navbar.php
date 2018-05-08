@@ -55,8 +55,9 @@
 		   if ($row2['perfil'] == "Administrador") {
 
 		?>	   
+			<li class="<?php echo $active_dashboard;?>"><a href="dashboard.php"><i class='glyphicon glyphicon-dashboard'></i> Inicio<span class="sr-only">(current)</span></a></li>
 
-			<li class="<?php echo $active_facturas;?>"><a href="facturas.php"><i class='glyphicon glyphicon-list-alt'></i> Consumos <span class="sr-only">(current)</span></a></li>
+			<li class="<?php echo $active_facturas;?>"><a href="facturas.php"><i class='glyphicon glyphicon-list-alt'></i> Consumos</a></li>
 
 			<li class="<?php echo $active_productos;?>"><a href="productos.php"><i class='glyphicon glyphicon-barcode'></i> Productos</a></li>
 
