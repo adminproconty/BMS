@@ -6,48 +6,145 @@ function load() {
     chartBar();
     charPie();
     chartLine();
+    getConsumoDia();
+    getCajaChicaDia();
+    getTopFive();
+    getTopTen();
+    topFiveTorta();
+    chartBar();
+    chartLine();
+    consumoMesGrafica();
 }
 
-function chartBar() {
+function getConsumoDia(){
+    $.ajax({
+        type: "GET",
+        url: "http://proconty.com/API/bms/kpi/getConsumoDia.php",
+        success: function(data) {
+            $('#consumo-dia').html('$' + data.data[0].total);
+        }
+    });
+}
+
+function getCajaChicaDia(){
+    $.ajax({
+        type: "GET",
+        url: "http://proconty.com/API/bms/kpi/getCajaChicaDia.php",
+        success: function(data) {
+            $('#caja-chica-dia').html('$' + data.data[0].total);
+        }
+    });
+}
+
+function getTopFive() {
+    $.ajax({
+        type: "GET",
+        url: "http://proconty.com/API/bms/kpi/getTopFive.php",
+        success: function(data) {
+            var total = 0;
+            for (var i = 0; i < data.data.length; i++) {
+                total += data.data[i].maxPro;
+            }
+            $('#topFive').html(total);
+        }
+    });
+ }
+
+ function getTopTen() {
+    $.ajax({
+        type: "GET",
+        url: "http://proconty.com/API/bms/kpi/getTopTenMes.php",
+        success: function(data) {
+            var total = 0;
+            for (var i = 0; i < data.data.length; i++) {
+                total += data.data[i].maxPro;
+            }
+            $('#topTen').html(total);
+        }
+    });
+ }
+
+ function topFiveTorta() {
+    var datos = [];
+    var labels = [];
+    $.ajax({
+        type: "GET",
+        url: "http://proconty.com/API/bms/kpi/getTopFive.php",
+        success: function(data) {
+            for (var i = 0; i < data.data.length; i++) {
+                datos.push(data.data[i].maxPro);
+                labels.push(data.data[i].nombre_producto)
+            }
+            graficoTorta(datos, labels);
+        }
+    });
+ }
+ 
+ function graficoTorta(datos, labels) {
+    var randomScalingFactor = function() {
+        return Math.round(Math.random() * 100);
+    };
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: datos,
+                backgroundColor: [
+                    "red",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                ],
+                label: 'Dataset 1'
+            }],
+            labels: labels
+        },
+        options: {
+            responsive: true
+        }
+    };
+    var ctx = document.getElementById("chart-pie").getContext('2d');
+    var myChart = new Chart(ctx, config);
+ 
+ }
+
+
+ function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+ }
+ 
+ function chartBar() {
     var datos = [];
     $.ajax({
         type: "GET",
-        url: "./ajax/graficas/barras.php",
+        url: "http://proconty.com/API/bms/kpi/getTopTenMes.php",
         data: "id=1",
         success: function(data) {
-            var datos = JSON.parse(data);
+            var datos = data.data;
             if (datos.length > 0) {
                 var ctx = document.getElementById("myChartBar").getContext('2d');
                 var labels = [];
-                var valores = [];
+                var datasets = [];
                 for (var i = 0; i < datos.length; i++) {
-                    labels.push(datos[i].producto);
-                    valores.push(datos[i].cantidad * 1);
+                    labels.push(datos[i].fecha);
+                    datasets.push({
+                        label: datos[i].nombre_producto,
+                        backgroundColor: getRandomColor(),
+                        borderWidth: 1,
+                        data: [datos[i].maxPro]
+                    })
                 }
+                console.log(labels);
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: labels,
-                        datasets: [{
-                            data: valores,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
+                        datasets: datasets
                     },
                     options: {
                         scales: {
@@ -62,7 +159,8 @@ function chartBar() {
             }
         }
     });
-}
+ }
+
 
 function charPie() {
     var randomScalingFactor = function() {
@@ -103,48 +201,158 @@ function charPie() {
     };
 
     window.onload = function() {
-        var ctx = document.getElementById('chart-pie').getContext('2d');
+        var ctx = document.getElementById('chart-torta').getContext('2d');
         window.myPie = new Chart(ctx, config);
     };
 }
 
 function chartLine() {
-    new Chart(document.getElementById("chart-line"), {
-        type: 'line',
-        data: {
-            labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
-            datasets: [{
-                data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-                label: "Africa",
-                borderColor: "#3e95cd",
-                fill: false
-            }, {
-                data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-                label: "Asia",
-                borderColor: "#8e5ea2",
-                fill: false
-            }, {
-                data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-                label: "Europe",
-                borderColor: "#3cba9f",
-                fill: false
-            }, {
-                data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-                label: "Latin America",
-                borderColor: "#e8c3b9",
-                fill: false
-            }, {
-                data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-                label: "North America",
-                borderColor: "#c45850",
-                fill: false
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: 'World population per region (in millions)'
+    $.ajax({
+        type: "GET",
+        url: "http://proconty.com/API/bms/kpi/getCajaChicaMes.php",
+        data: "id=1",
+        success: function(data) {
+            var datos = data.data;
+            var labels = [];
+            var label = '';
+            var valores = [];
+            if (datos.length > 0) {
+                for (var i = 0; i < datos.length; i++) {
+                    switch (datos[i].mes) {
+                        case 1:
+                            label = 'Enero'
+                            break;
+                        case 2:
+                            label = 'Febrero'
+                            break;
+                        case 3:
+                            label = 'Marzo'
+                            break;
+                        case 4:
+                            label = 'Abril'
+                            break;
+                        case 5:
+                            label = 'Mayo'
+                            break;
+                        case 6:
+                            label = 'Junio'
+                            break;
+                        case 7:
+                            label = 'Julio'
+                            break;
+                        case 8:
+                            label = 'Agosto'
+                            break;
+                        case 9:
+                            label = 'Septiembre'
+                            break;
+                        case 10:
+                            label = 'Octubre'
+                            break;
+                        case 11:
+                            label = 'Noviembre'
+                            break;
+                        case 12:
+                            label = 'Diciembre'
+                            break;
+                        default:
+                            break;
+                    }
+                    labels.push(label);
+                    valores.push(datos[i].total);
+                }
+                new Chart(document.getElementById("chart-line"), {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: valores,
+                            label: "Caja Chica Mes",
+                            borderColor: "#3e95cd",
+                            fill: false
+                        }]
+                    }
+                });
             }
         }
     });
-}
+ }
+
+ function consumoMesGrafica() {
+    $.ajax({
+        type: "GET",
+        url: "http://proconty.com/API/bms/kpi/getConsumoMes.php",
+        data: "id=1",
+        success: function(data) {
+            var datos = data.data;
+            var labels = [];
+            var label = '';
+            var valores = [];
+            if (datos.length > 0) {
+                for (var i = 0; i < datos.length; i++) {
+                    switch (datos[i].mes) {
+                        case 1:
+                            label = 'Enero'
+                            break;
+                        case 2:
+                            label = 'Febrero'
+                            break;
+                        case 3:
+                            label = 'Marzo'
+                            break;
+                        case 4:
+                            label = 'Abril'
+                            break;
+                        case 5:
+                            label = 'Mayo'
+                            break;
+                        case 6:
+                            label = 'Junio'
+                            break;
+                        case 7:
+                            label = 'Julio'
+                            break;
+                        case 8:
+                            label = 'Agosto'
+                            break;
+                        case 9:
+                            label = 'Septiembre'
+                            break;
+                        case 10:
+                            label = 'Octubre'
+                            break;
+                        case 11:
+                            label = 'Noviembre'
+                            break;
+                        case 12:
+                            label = 'Diciembre'
+                            break;
+                        default:
+                            break;
+                    }
+                    labels.push(label);
+                    valores.push(datos[i].total);
+                }
+                new Chart(document.getElementById("chart-area"), {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: valores,
+                            label: "Consumo Mes",
+                            borderColor: getRandomColor(),
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        elements: {
+                            line: {
+                                tension: 0.6
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    });
+ }

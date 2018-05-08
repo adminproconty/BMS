@@ -41,7 +41,7 @@
 				<div class="small-box bg-aqua">
 					<div class="inner">
 						<h4>
-							<strong>$0.00</strong>
+							<strong id="consumo-dia">$0.00</strong>
 						</h4>
 						<strong>Consumos</strong>
 					</div>
@@ -55,7 +55,7 @@
 				<div class="small-box bg-green">
 					<div class="inner">
 						<h4>
-							<strong>$0.00</strong>
+							<strong id="caja-chica-dia">$0.00</strong>
 						</h4>
 						<strong>Caja Chica</strong>
 					</div>
@@ -69,7 +69,7 @@
 				<div class="small-box bg-yellow">
 					<div class="inner">
 						<h4>
-							<strong>00</strong>
+							<strong id ="topFive">00</strong>
 						</h4>
 						<strong>Top 5</strong>
 					</div>
@@ -83,7 +83,7 @@
 				<div class="small-box bg-red">
 					<div class="inner">
 						<h4>
-							<strong>00</strong>
+							<strong id="topTen">00</strong>
 						</h4>
 						<strong>Top 10</strong>
 					</div>
@@ -99,12 +99,12 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            Título
+                            Consumos
                         </h3>
                     </div>
                     <div class="box-body">
                         <div class="chart">
-                            <canvas id="myChartBar" width="100%"></canvas>
+							<canvas id="chart-area" width="100%"></canvas>
                         </div>
                     </div>
                 </div>
@@ -113,12 +113,12 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            Título
+                            Caja Chica
                         </h3>
                     </div>
                     <div class="box-body">
                         <div class="chart">
-                            <canvas id="chart-pie" width="100%"></canvas>
+							<canvas id="chart-line" width="100%"></canvas>							
                         </div>
                     </div>
                 </div>
@@ -129,12 +129,12 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            Título
+                            TOP 5 Productos / Día
                         </h3>
                     </div>
                     <div class="box-body">
                         <div class="chart">
-                            <canvas id="chart-pie" width="100%"></canvas>
+							<canvas id="chart-pie" width="100%"></canvas>
                         </div>
                     </div>
                 </div>
@@ -143,12 +143,12 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            Título
+                            TOP 10 Productos / Mes
                         </h3>
                     </div>
                     <div class="box-body">
                         <div class="chart">
-                            <canvas id="chart-line" width="100%"></canvas>
+						<canvas id="myChartBar" width="100%"></canvas>
                         </div>
                     </div>
                 </div>
