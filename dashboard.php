@@ -14,7 +14,7 @@
 	$active_caja_chica = "";
 	$active_kardex="";
 	$active_dashboard="active";
-	$title="Consumos | SGB";
+	$title="Inicio | SGB";
 
 	include('ajax/is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 	$session_id= session_id();

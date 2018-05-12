@@ -41,7 +41,7 @@ if ($login->isUserLoggedIn() == true) {
 	} 
 	
 
-	header("location: facturas.php");
+	header("location: dashboard.php");
 
 } else {
     // the user is not logged in. you can do whatever you want here.

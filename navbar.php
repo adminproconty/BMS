@@ -55,25 +55,79 @@
 		   if ($row2['perfil'] == "Administrador") {
 
 		?>	   
-			<li class="<?php echo $active_dashboard;?>"><a href="dashboard.php"><i class='glyphicon glyphicon-dashboard'></i> Inicio<span class="sr-only">(current)</span></a></li>
+			<li class="<?php echo $active_dashboard;?>"><a href="dashboard.php"><i class='glyphicon glyphicon-dashboard'></i> Inicio<span class="sr-only"></span></a></li>
 
-			<li class="<?php echo $active_facturas;?>"><a href="facturas.php"><i class='glyphicon glyphicon-list-alt'></i> Consumos</a></li>
+			<li class="<?php if(isset($active_perfil)){echo $active_perfil;}echo $active_usuarios;?> dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<i  class='glyphicon glyphicon-cog'></i> 
+                Administración 
+                <span class="sr-only">(current)</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="perfil.php">Configuración</a></li>
+                <li><a href="usuarios.php">Usuarios</a></li>
+                <!-- <li><a href="#">Empleados</a></li> -->
+            </ul>
+        	</li>
 
-			<li class="<?php echo $active_productos;?>"><a href="productos.php"><i class='glyphicon glyphicon-barcode'></i> Productos</a></li>
+			<li class="<?php echo $active_facturas; echo $active_tarjetas; echo $active_clientes;?> dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<i class='glyphicon glyphicon-list-alt'></i>
+                Ingresos 
+                <span class="sr-only">(current)</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="facturas.php">Facturación</a></li>
+                <li><a href="clientes.php">Clientes</a></li>
+                <li><a href="tarjetas.php">Tarjetas</a></li>
+                <!-- <li><a href="#">Cuentas x Cobrar</a></li> -->
+            </ul>
+        	</li>
 
-			<li class="<?php echo $active_clientes;?>"><a href="clientes.php"><i class='glyphicon glyphicon-user'></i> Clientes</a></li>
+			<li class="<?php echo $active_caja_chica;?> dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<i  class='glyphicon glyphicon-shopping-cart'></i>
+                Egresos 
+                <span class="sr-only">(current)</span>
+            </a>
+            <ul class="dropdown-menu">
+                <!-- <li><a href="#">Compras</a></li> -->
+                <li><a href="caja_chica.php">Caja Chica</a></li>
+                <li><a href="proveedores.php">Proveedores</a></li>
+                <!-- <li><a href="#">Cuenta x pagar</a></li> -->
+            </ul>
+        	</li>
 
-			<li class="<?php echo $active_tarjetas;?>"><a href="tarjetas.php"><i class='glyphicon glyphicon-credit-card'></i> Tarjetas</a></li>
-
-			<li class="<?php echo $active_usuarios;?>"><a href="usuarios.php"><i  class='glyphicon glyphicon-lock'></i> Usuarios</a></li>
-
-			<li class="<?php echo $active_caja_chica;?>"><a href="caja_chica.php"><i  class='glyphicon glyphicon-shopping-cart'></i> Caja Chica</a></li>
-
-			<li class="<?php echo $active_kardex;?>"><a href="kardex.php"><i  class='glyphicon glyphicon-list-alt'></i> Kardex</a></li>
+			<li class="<?php echo $active_productos; echo $active_kardex;?> dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<i class='glyphicon glyphicon-barcode'></i>
+                Bodega 
+                <span class="sr-only">(current)</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="productos.php">Productos</a></li>
+                <li><a href="kardex.php">Movimientos Kardex</a></li>
+            </ul>
+        	</li>
 
 			<li class="<?php echo $active_reportes;?>"><a href="reportes.php"><i  class='glyphicon glyphicon-paste'></i> Reportes</a></li>
+
+			<!-- <li class="<?php echo $active_facturas;?>"><a href="facturas.php"><i class='glyphicon glyphicon-list-alt'></i> Consumos</a></li> -->
+
+			<!-- <li class="<?php echo $active_productos;?>"><a href="productos.php"><i class='glyphicon glyphicon-barcode'></i> Productos</a></li> -->
+
+			<!-- <li class="<?php echo $active_clientes;?>"><a href="clientes.php"><i class='glyphicon glyphicon-user'></i> Clientes</a></li> -->
+
+			<!-- <li class="<?php echo $active_tarjetas;?>"><a href="tarjetas.php"><i class='glyphicon glyphicon-credit-card'></i> Tarjetas</a></li> -->
+
+			<!-- <li class="<?php echo $active_usuarios;?>"><a href="usuarios.php"><i  class='glyphicon glyphicon-lock'></i> Usuarios</a></li> -->
+
+			<!-- <li class="<?php echo $active_caja_chica;?>"><a href="caja_chica.php"><i  class='glyphicon glyphicon-shopping-cart'></i> Caja Chica</a></li> -->
+
+			<!-- <li class="<?php echo $active_kardex;?>"><a href="kardex.php"><i  class='glyphicon glyphicon-list-alt'></i> Kardex</a></li> -->
+
 			
-			<li class="<?php if(isset($active_perfil)){echo $active_perfil;}?>"><a href="perfil.php"><i  class='glyphicon glyphicon-cog'></i> Configuración</a></li>
+			<!-- <li class="<?php if(isset($active_perfil)){echo $active_perfil;}?>"><a href="perfil.php"><i  class='glyphicon glyphicon-cog'></i> Configuración</a></li> -->
 
 		<?php
 

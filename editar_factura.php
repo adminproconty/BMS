@@ -47,13 +47,13 @@
 		}	
 		else
 		{
-			header("location: facturas.php");
+			header("location: dashboard.php");
 			exit;	
 		}
 	} 
 	else 
 	{
-		header("location: facturas.php");
+		header("location: dashboard.php");
 		exit;
 	}
 ?>
