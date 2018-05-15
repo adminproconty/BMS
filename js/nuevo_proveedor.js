@@ -31,7 +31,6 @@ $('#nuevo_proveedor').submit(function(event) {
     } else {
         datos.automatico_datil = 1;
     }
-    console.log('datos', datos);
     $.ajax({
         url: 'http://proconty.com/API/bms/proveedor/insert.php',
         dataType: 'json',

@@ -85,11 +85,11 @@
                 </div>
                    
                 <div class="form-group row">  
-                    <label for="contaco_pro" class="col-md-1 control-label">Contacto</label>
-                    <div class="col-md-2">
-                        <input type="number" class="form-control input-sm" id="contacto_pro" placeholder="" required>
+                    <label for="contaco_pro" class="col-md-2 control-label">Persona de Contacto</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control input-sm" id="contacto_pro" placeholder="" required>
                      </div>
-                     <div class="col-md-9">
+                     <div class="col-md-7">
                      <label for="nota_pedido" class="col-md-3 control-label">Nota Pedido</label>
                      <div class="form-check">
                         <input class="form-check-input" type="radio" name="nota_pedido" id="nota_si" value = "si" >
