@@ -79,9 +79,9 @@
 			</div>
 
             <div class="form-group">
-				<label for="codigo" class="col-sm-3 control-label">Contacto</label>
+				<label for="codigo" class="col-sm-3 control-label">Persona de Contacto</label>
 				<div class="col-sm-8">
-                <input type="number" class="form-control input-sm" id="contacto_pro" placeholder="" required>
+                <input type="text" class="form-control input-sm" id="contacto_pro" placeholder="" required>
 				</div>
 			</div>
 
